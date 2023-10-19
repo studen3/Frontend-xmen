@@ -1,36 +1,97 @@
-/*// Obtenemos referencias a los elementos del DOM
-const mostrarFormularioButton = document.getElementById("mostrarFormulario");
-const formularioContainer = document.getElementById("formularioContainer");
-const agregarButton = document.getElementById("agregar");
+const btnAbrirMenu = document.querySelector("#btnAbrir");
+const btbCerrarMenu = document.querySelector("#btnCerrar");
+const formularioContainer = document.querySelector(".formularioContainer");
+const container = document.querySelector(".container");
+const formulario = document.querySelector("#formulario");
 
-// Agregamos un manejador de eventos al botón para mostrar/ocultar el formulario
-mostrarFormularioButton.addEventListener("click", () => {
-    formularioContainer.classList.toggle("oculto");
+// Abrir formulario con el boton del header
+btnAbrirMenu.addEventListener("click", () => {
+  formularioContainer.classList.add("abrirFormulario");
 });
 
-// Agregamos un manejador de eventos al botón "Agregar" para realizar la acción deseada
-agregarButton.addEventListener("click", () => {
-    // Aquí puedes recopilar los valores de los campos del formulario y realizar la acción deseada
-    const imagen = document.getElementById("imagen").value;
-    const nombre = document.getElementById("nombre").value;
-    const apodo = document.getElementById("apodo").value;
-    const genero = document.getElementById("genero").value;
-    const poder = document.getElementById("poder").value;
-    const rol = document.getElementById("rol").value;
-    const calificacion = document.getElementById("calificacion").value;
+// Cerrar formulario con el boton del formulario
+btbCerrarMenu.addEventListener("click", () => {
+  formularioContainer.classList.remove("abrirFormulario");
+});
 
-    // Puedes hacer lo que necesites con estos valores, por ejemplo, agregarlos a una lista de personajes.
-    console.log("Personaje agregado:", {
-        imagen,
-        nombre,
-        apodo,
-        genero,
-        poder,
-        rol,
-        calificacion
+async function obtenerPersonajes() {
+  try {
+    const respuesta = await fetch("https://api-xmen.2.us-1.fl0.io/personajes");
+    const data = await respuesta.json();
+    data.forEach((personaje) => {
+      const $personaje = document.createElement("div");
+      $personaje.classList.add("card");
+      $personaje.id = personaje.id_personaje;
+      $personaje.innerHTML = `
+        <img src="${personaje.imagen}"/>
+        <h2>${personaje.nombre}</h2>
+        <p>Apodo: ${personaje.apodo}</p>
+        <p>Género: ${personaje.genero}</p>
+        <p>Poder: ${personaje.poder}</p>
+        <p>Rol: ${personaje.rol}</p>
+        <p>Calificación: ${personaje.calificacion}/10</p>
+        <button class="editar">Editar</button>
+        <button class="eliminar">Eliminar</button>
+        `;
+      container.appendChild($personaje);
     });
+  } catch (error) {
+    console.log(error);
+    alert("No se pudo obtener los personajes");
+  }
+}
 
-    // Limpia los campos del formulario
-    document.getElementById("formulario").reset();
-});*/
+function crearPersonaje() {
+  formulario.addEventListener("submit", async (evento) => {
+    evento.preventDefault();
+    try {
+      const respuesta = await fetch(
+        "https://api-xmen.2.us-1.fl0.io/personajes",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            imagen: evento.target.elements.imageURL.value,
+            nombre: evento.target.elements.nombre.value,
+            apodo: evento.target.elements.apodo.value,
+            genero: evento.target.elements.genero.value,
+            poder: evento.target.elements.poder.value,
+            rol: evento.target.elements.rol.value,
+            calificacion: evento.target.elements.calificacion.value,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      const data = await respuesta.json();
+      const personaje = data.body;
+      const $personaje = document.createElement("div");
+      $personaje.classList.add("card");
+      $personaje.id = personaje.id_personaje;
+      $personaje.innerHTML = `
+        <img src="${personaje.imagen}"/>
+        <h2>${personaje.nombre}</h2>
+        <p>Apodo: ${personaje.apodo}</p>
+        <p>Género: ${personaje.genero}</p>
+        <p>Poder: ${personaje.poder}</p>
+        <p>Rol: ${personaje.rol}</p>
+        <p>Calificación: ${personaje.calificacion}/10</p>
+        <button class="editar">Editar</button>
+        <button class="eliminar">Eliminar</button>
+        `;
+      container.appendChild($personaje);
+      formulario.reset();
+      formularioContainer.classList.remove("abrirFormulario");
+      alert("Personaje creado exitosamente");
+    } catch (error) {
+      console.log(error);
+      alert("No se pudo crear el personaje");
+    }
+  });
+}
 
+// Obtener los personajes cuando se cargue la pagina
+document.addEventListener("DOMContentLoaded", () => {
+  obtenerPersonajes();
+  crearPersonaje();
+});
