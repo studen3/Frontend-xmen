@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Vite App</title>
+  </head>
+  <body>
+
+    <header>
+      <h1>Personajes X-Men</h1>
+    </header>
+
+    <button id="btn">crear y agregar Personaje</button>
+
+    <div id="formularioContainer" class="oculto">
+      <form id="formulario">
+        <label for="imageURL">URL de la Imagen:</label>
+        <input
+          type="url"
+          id="imageURL"
+          name="imageURL"
+          placeholder="Ingrese la URL de la imagen"
+          required
+        />
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" />
+        <label for="apodo">Apodo:</label>
+        <input type="text" id="apodo" />
+        <label for="genero">Género:</label>
+        <select id="genero">
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+        </select>
+        <label for="poder">Poder:</label>
+        <input type="text" id="poder" />
+        <label for="rol">Rol:</label>
+        <input type="text" id="rol" />
+        <label for="calificacion">Calificación (1-10):</label>
+        <input type="number" id="calificacion" min="1" max="10" />
+        <button id="agregarPersonaje">Agregar Personaje</button>
+      </form>
+    </div>
+
+    <div class="container">
+      <div class="card">
+        <img src="https://i.pinimg.com/originals/c0/75/18/c07518bcd54922a80acb8dbcb5b73826.jpg" />
+        <h2>Logan</h2>
+        <p>Apodo: Wolverine</p>
+        <p>Género: Masculino</p>
+        <p>Poder: Factor de curación y garras retráctiles</p>
+        <p>Rol: Luchador</p>
+        <p>Calificación: 9/10</p>
+        <button class="editar">Editar</button>
+        <button class="eliminar">Eliminar</button>
+      </div>
+      <div class="card">
+        <img src="https://i.pinimg.com/originals/c0/75/18/c07518bcd54922a80acb8dbcb5b73826.jpg" alt="Imagen de Jean Grey" />
+        <h2>Jean Grey</h2>
+        <p>Apodo: Phoenix</p>
+        <p>Género: Femenino</p>
+        <p>Poder: Telepatía y telequinesis</p>
+        <p>Rol: Mutante Omega</p>
+        <p>Calificación: 8/10</p>
+        <button class="editar">Editar</button>
+        <button class="eliminar">Eliminar</button>
+      </div>
+      <div class="card">
+        <img src="https://i.pinimg.com/originals/c0/75/18/c07518bcd54922a80acb8dbcb5b73826.jpg" alt="Imagen de Storm" />
+        <h2>Storm</h2>
+        <p>Apodo: Tormenta</p>
+        <p>Género: Femenino</p>
+        <p>Poder: Control del clima</p>
+        <p>Rol: Líder de los X-Men</p>
+        <p>Calificación: 9/10</p>
+        <button class="editar">Editar</button>
+        <button class="eliminar">Eliminar</button>
+      </div>
+      <!-- Repite esta estructura para otros personajes -->
+    </div>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
