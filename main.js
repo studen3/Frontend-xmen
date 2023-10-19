@@ -3,6 +3,7 @@ const btbCerrarMenu = document.querySelector("#btnCerrar");
 const formularioContainer = document.querySelector(".formularioContainer");
 const container = document.querySelector(".container");
 const formulario = document.querySelector("#formulario");
+const eliminarPersonaje = document.querySelector(".eliminar")
 
 // Abrir formulario con el boton del header
 btnAbrirMenu.addEventListener("click", () => {
@@ -95,3 +96,5 @@ document.addEventListener("DOMContentLoaded", () => {
   obtenerPersonajes();
   crearPersonaje();
 });
+
+// Eliminar personaje
