@@ -91,10 +91,38 @@ function crearPersonaje() {
   });
 }
 
+// Eliminar personaje
+function eliminarPersonaje() {
+  const botonesEliminar = document.querySelectorAll(".eliminar");
+
+  botonesEliminar.forEach((boton) => {
+    boton.addEventListener("click", async (evento) => {
+      const personajeId = evento.target.parentNode.id;
+
+      try {
+        const respuesta = await fetch(`https://api-xmen.2.us-1.fl0.io/personajes/${personajeId}`, {
+          method: "DELETE",
+        });
+
+        if (respuesta.status === 200) {
+          // Si la eliminación es exitosa
+          evento.target.parentNode.remove();
+          alert("Personaje eliminado exitosamente");
+        } else {
+          alert("No se pudo eliminar el personaje");
+        }
+      } catch (error) {
+        console.log(error);
+        alert("Ocurrió un error al eliminar el personaje");
+      }
+    });
+  });
+}
+
 // Obtener los personajes cuando se cargue la pagina
 document.addEventListener("DOMContentLoaded", () => {
   obtenerPersonajes();
   crearPersonaje();
+  eliminarPersonaje();
 });
 
-// Eliminar personaje
