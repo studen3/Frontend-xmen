@@ -50,22 +50,44 @@
       </form>
     </div>
 
-    <div class="container">
-      <!-- <div class="card">
-        <img
-          src="https://i.pinimg.com/originals/c0/75/18/c07518bcd54922a80acb8dbcb5b73826.jpg"
+    <div class="formularioEditar">
+      <button id="btnCerrar">❌</button>
+      <form id="formularioEditar">
+        <label for="imageURL">URL de la Imagen:</label>
+        <input
+          type="url"
+          id="imageURL"
+          name="imageURL"
+          placeholder="Ingrese la URL de la imagen"
+          required
         />
-        <h2>Logan</h2>
-        <p>Apodo: Wolverine</p>
-        <p>Género: Masculino</p>
-        <p>Poder: Factor de curación y garras retráctiles</p>
-        <p>Rol: Luchador</p>
-        <p>Calificación: 9/10</p>
-        <button class="editar">Editar</button>
-        <button class="eliminar">Eliminar</button>
-      </div> -->
-      <!-- Repite esta estructura para otros personajes -->
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" required />
+        <label for="apodo">Apodo:</label>
+        <input type="text" id="apodo" name="apodo" required />
+        <label for="genero">Género:</label>
+        <select id="genero" name="genero" required>
+          <option value="masculino">Masculino</option>
+          <option value="femenino">Femenino</option>
+        </select>
+        <label for="poder">Poder:</label>
+        <input type="text" id="poder" name="poder" required />
+        <label for="rol">Rol:</label>
+        <input type="text" id="rol" name="rol" required />
+        <label for="calificacion">Calificación (1-10):</label>
+        <input
+          type="number"
+          id="calificacion"
+          name="calificacion"
+          min="1"
+          max="10"
+          required
+        />
+        <button type="submit" id="editarPersonaje">Editar Personaje</button>
+      </form>
     </div>
+
+    <div class="container"></div>
 
     <script type="module" src="/main.js"></script>
   </body>
